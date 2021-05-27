@@ -2,15 +2,19 @@ package by.training.array.service.impl;
 
 import by.training.array.entity.CustomArray;
 import by.training.array.service.ServiceSortCustomArray;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
+
+    final static Logger logger = LogManager.getLogger();
 
     @Override
     public boolean shellSort(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
         int i = 0;
         int buffer;
-
         while (i < array.length - 1) {
             if (array[i] > array[i + 1]) {
                 buffer = array[i];
@@ -25,6 +29,7 @@ public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
             }
         }
         customArray.setCustomArray(array);
+        logger.log(Level.INFO, "CustomArray was sorted by Shell sort");
         return true;
     }
 
@@ -46,6 +51,7 @@ public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
             }
         }
         customArray.setCustomArray(array);
+        logger.log(Level.INFO, "CustomArray was sorted by bubble sort");
         return true;
     }
 
@@ -55,8 +61,10 @@ public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
         boolean result = algorithmQuickSort(array, 0, array.length - 1);
         if (result) {
             customArray.setCustomArray(array);
+            logger.log(Level.INFO, "CustomArray was sorted by quick sort");
             return true;
         }
+        logger.log(Level.INFO, "CustomArray wasn't sorted by quick sort");
         return false;
     }
 

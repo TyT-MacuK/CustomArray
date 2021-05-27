@@ -3,8 +3,14 @@ package by.training.array.service.impl;
 import by.training.array.entity.CustomArray;
 import by.training.array.exception.CustomArrayException;
 import by.training.array.service.ServiceCustomArray;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class ServiceCustomArrayImpl implements ServiceCustomArray {
+
+    static Logger logger = LogManager.getLogger();
+
     @Override
     public int min(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
@@ -14,6 +20,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
                 min = array[i];
             }
         }
+        logger.log(Level.INFO, "Min value is {}", min);
         return min;
     }
 
@@ -26,6 +33,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
                 max = array[i];
             }
         }
+        logger.log(Level.INFO, "Max value is {}", max);
         return max;
     }
 
@@ -37,13 +45,16 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
                 array[i] = 0;
             }
         }
+        logger.log(Level.INFO, "Numbers were replaced");
         return true;
     }
 
     @Override
     public int middle(CustomArray customArray) throws CustomArrayException {
         int arrayLength = customArray.length();
-        return (arrayLength + 1) / 2;
+        int middle = (arrayLength + 1) / 2;
+        logger.log(Level.INFO, "Middle in array = {}", middle);
+        return middle;
     }
 
     @Override
@@ -53,6 +64,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
         }
+        logger.log(Level.INFO, "Sum numbers in array = {}", sum);
         return sum;
     }
 
@@ -65,6 +77,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
                 negativeNumbers++;
             }
         }
+        logger.log(Level.INFO, "Negative numbers in array = {}", negativeNumbers);
         return negativeNumbers;
     }
 
@@ -77,6 +90,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
                 positiveNumbers++;
             }
         }
+        logger.log(Level.INFO, "Positive numbers in array = {}", positiveNumbers);
         return positiveNumbers;
     }
 }

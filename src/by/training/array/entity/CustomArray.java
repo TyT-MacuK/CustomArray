@@ -55,7 +55,7 @@ public class CustomArray {
         }
 
         CustomArray customArray = (CustomArray) object;
-        return this.array == customArray.array;
+        return Arrays.equals(customArray.getCustomArray(), array);
     }
 
     @Override
