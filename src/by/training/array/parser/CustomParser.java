@@ -1,44 +1,38 @@
 package by.training.array.parser;
 
 import by.training.array.entity.CustomArray;
+import by.training.array.exception.CustomArrayException;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class CustomParser {
 
     static final Logger logger = LogManager.getLogger();
+    private final String REG_NUMBER = "(-?\\d+)";
 
-    public CustomArray parserStringToCustomArray(String line) {
-        String lineWithoutPunctuation = "";
-        int beginNumber = 0;
-        int endNumber;
-        int countNumbers = 0;
+    public CustomArray parserStringToCustomArray(String line) throws CustomArrayException {
+        Pattern pattern = Pattern.compile(REG_NUMBER);
+        Matcher matcher = pattern.matcher(line);
+        List<Integer> listInt = new ArrayList<>();
+        StringBuilder bufferString = new StringBuilder();
 
-        for (int i = 0; i < line.length(); i++) {
-            if (!Character.isDigit(line.charAt(i)) && line.charAt(i) != '-') {
-                endNumber = i;
-                if (Character.isDigit(line.charAt(i - 1)) && line.charAt(i) != '-') {
-                    lineWithoutPunctuation = lineWithoutPunctuation + line.substring(beginNumber, endNumber) + " ";
-                    countNumbers++;
-                }
-                beginNumber = endNumber + 1;
-            }
+        while (matcher.find()) {
+           bufferString.append(matcher.group(1) + " ");
         }
 
-        int[] arrayResult = new int[countNumbers];
-        beginNumber = 0;
-        int j = 0;
+        String[] arrayString = bufferString.toString().split("\\s");
+        int[] result = new int[arrayString.length];
 
-        for (int i = 0; i < lineWithoutPunctuation.length(); i++) {
-            if (lineWithoutPunctuation.charAt(i) == ' ') {
-                endNumber = i;
-                arrayResult[j] = Integer.parseInt(lineWithoutPunctuation.substring(beginNumber, endNumber));
-                j++;
-                beginNumber = endNumber + 1;
-            }
+        for (int i = 0; i < result.length; i++) {
+            result[i] = Integer.parseInt(arrayString[i]);
         }
         logger.log(Level.INFO, "Array was parsed");
-        return new CustomArray(arrayResult);
+        return new CustomArray(result);// добавить массив
     }
 }

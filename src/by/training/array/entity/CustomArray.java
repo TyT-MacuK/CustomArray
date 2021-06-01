@@ -1,13 +1,23 @@
 package by.training.array.entity;
 
 import by.training.array.exception.CustomArrayException;
+import by.training.array.validation.ArrayValidator;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.Arrays;
 
 public class CustomArray {
 
+    private static final Logger logger = LogManager.getLogger();
     private int[] array;
 
-    public CustomArray(int... array) {
+    public CustomArray(int... array) throws CustomArrayException {
+        if (!ArrayValidator.checkArrayIsValid(array)) {
+            logger.log(Level.ERROR, "Array is not valid");
+            throw new CustomArrayException("Array can't be null, and length must be greater than 0");
+        }
         this.array = array;
     }
 
@@ -15,7 +25,11 @@ public class CustomArray {
         return array.clone();
     }
 
-    public void setCustomArray(int... array) {
+    public void setCustomArray(int... array) throws CustomArrayException {
+        if (!ArrayValidator.checkArrayIsValid(array)) {
+            logger.log(Level.ERROR, "Array is not valid");
+            throw new CustomArrayException("Array can't be null, and length must be greater than 0");
+        }
         this.array = array;
     }
 
@@ -25,6 +39,7 @@ public class CustomArray {
 
     public int getElement(int number) throws CustomArrayException {
         if (number < 0 || number > array.length) {
+            logger.log(Level.ERROR, "Index" + number + "is not valid");
             throw new CustomArrayException("Index " + number + "must be > 0 and < than the total length of the array");
         }
         return array[number];
@@ -32,6 +47,7 @@ public class CustomArray {
 
     public void setElement(int number, int index) throws CustomArrayException {
         if (number < 0 || number > array.length) {
+            logger.log(Level.ERROR, "Index" + number + "is not valid");
             throw new CustomArrayException("Index " + number + "must be > 0 and < than the total length of the array");
         }
         array[index] = number;
@@ -60,10 +76,6 @@ public class CustomArray {
 
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder();
-        for (int i : array) {
-            builder.append(i + " ");
-        }
-        return builder.toString();
+        return Arrays.toString(array);
     }
 }
