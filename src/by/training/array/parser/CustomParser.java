@@ -33,6 +33,6 @@ public class CustomParser {
             result[i] = Integer.parseInt(arrayString[i]);
         }
         logger.log(Level.INFO, "Array was parsed");
-        return new CustomArray(result);// добавить массив
+        return new CustomArray(result);
     }
 }
