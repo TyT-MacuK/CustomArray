@@ -8,10 +8,10 @@ import org.apache.logging.log4j.Logger;
 
 public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
 
-    final static Logger logger = LogManager.getLogger();
+    static final Logger logger = LogManager.getLogger();
 
     @Override
-    public boolean shellSort(CustomArray customArray) {
+    public int[] shellSort(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
         int i = 0;
         int buffer;
@@ -28,13 +28,12 @@ public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
                 i++;
             }
         }
-        customArray.setCustomArray(array);
         logger.log(Level.INFO, "CustomArray was sorted by Shell sort");
-        return true;
+        return array;
     }
 
     @Override
-    public boolean bubbleSort(CustomArray customArray) {
+    public int[] bubbleSort(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
         int buffer;
         boolean flag = false;
@@ -50,22 +49,17 @@ public class ServiceSortCustomArrayImpl implements ServiceSortCustomArray {
                 }
             }
         }
-        customArray.setCustomArray(array);
         logger.log(Level.INFO, "CustomArray was sorted by bubble sort");
-        return true;
+        return array;
     }
 
     @Override
-    public boolean quickSort(CustomArray customArray) {
+    public int[] quickSort(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
-        boolean result = algorithmQuickSort(array, 0, array.length - 1);
-        if (result) {
-            customArray.setCustomArray(array);
-            logger.log(Level.INFO, "CustomArray was sorted by quick sort");
-            return true;
-        }
-        logger.log(Level.INFO, "CustomArray wasn't sorted by quick sort");
-        return false;
+        algorithmQuickSort(array, 0, array.length - 1);
+        logger.log(Level.INFO, "CustomArray was sorted by quick sort");
+        return array;
+
     }
 
     private boolean algorithmQuickSort(int[] array, int leftBorder, int rightBorder) {

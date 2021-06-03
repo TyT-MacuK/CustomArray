@@ -1,7 +1,6 @@
 package by.training.array.service.impl;
 
 import by.training.array.entity.CustomArray;
-import by.training.array.exception.CustomArrayException;
 import by.training.array.service.ServiceCustomArray;
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +8,7 @@ import org.apache.logging.log4j.Logger;
 
 public class ServiceCustomArrayImpl implements ServiceCustomArray {
 
-    static Logger logger = LogManager.getLogger();
+    static final Logger logger = LogManager.getLogger();
 
     @Override
     public int min(CustomArray customArray) {
@@ -22,6 +21,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
         }
         logger.log(Level.INFO, "Min value is {}", min);
         return min;
+
     }
 
     @Override
@@ -38,7 +38,7 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
     }
 
     @Override
-    public boolean replaceEvenNumbersByZero(CustomArray customArray) {
+    public int[] replaceEvenNumbersByZero(CustomArray customArray) {
         int[] array = customArray.getCustomArray();
         for (int i = 0; i < array.length; i++) {
             if (array[i] % 2 == 0) {
@@ -46,11 +46,11 @@ public class ServiceCustomArrayImpl implements ServiceCustomArray {
             }
         }
         logger.log(Level.INFO, "Numbers were replaced");
-        return true;
+        return array;
     }
 
     @Override
-    public int middle(CustomArray customArray) throws CustomArrayException {
+    public int middle(CustomArray customArray) {
         int arrayLength = customArray.length();
         int middle = (arrayLength + 1) / 2;
         logger.log(Level.INFO, "Middle in array = {}", middle);

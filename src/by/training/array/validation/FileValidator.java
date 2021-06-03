@@ -4,8 +4,7 @@ import java.io.File;
 
 public class FileValidator {
 
-    private FileValidator() {
-    }
+    private FileValidator() {}
 
     public static boolean checkFileIsValid(String path) {
         boolean result = false;

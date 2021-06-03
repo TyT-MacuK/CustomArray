@@ -3,9 +3,9 @@ package by.training.array.service;
 import by.training.array.entity.CustomArray;
 
 public interface ServiceSortCustomArray {
-    boolean shellSort(CustomArray customArray);
+    int[] shellSort(CustomArray customArray);
 
-    boolean bubbleSort(CustomArray customArray);
+    int[] bubbleSort(CustomArray customArray);
 
-    boolean quickSort(CustomArray customArray);
+    int[] quickSort(CustomArray customArray);
 }

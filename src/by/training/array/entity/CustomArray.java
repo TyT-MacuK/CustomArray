@@ -39,16 +39,16 @@ public class CustomArray {
 
     public int getElement(int number) throws CustomArrayException {
         if (number < 0 || number > array.length) {
-            logger.log(Level.ERROR, "Index" + number + "is not valid");
-            throw new CustomArrayException("Index " + number + "must be > 0 and < than the total length of the array");
+            logger.log(Level.ERROR, "Index {} is not valid", number);
+            throw new CustomArrayException("Index must be > 0 and < than the total length of the array");
         }
         return array[number];
     }
 
     public void setElement(int number, int index) throws CustomArrayException {
         if (number < 0 || number > array.length) {
-            logger.log(Level.ERROR, "Index" + number + "is not valid");
-            throw new CustomArrayException("Index " + number + "must be > 0 and < than the total length of the array");
+            logger.log(Level.ERROR, "Index {} is not valid", number);
+            throw new CustomArrayException("Index must be > 0 and < than the total length of the array");
         }
         array[index] = number;
     }

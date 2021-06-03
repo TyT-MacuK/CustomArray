@@ -10,8 +10,11 @@ public class LineValidator {
     private LineValidator() { }
 
     public static boolean checkValidLine(String line) {
-        Pattern pattern = Pattern.compile(NUMBERS_AND_PUNCTUATION);
-        Matcher matcher = pattern.matcher(line);
-        return matcher.matches();
+        if (line != null) {
+            Pattern pattern = Pattern.compile(NUMBERS_AND_PUNCTUATION);
+            Matcher matcher = pattern.matcher(line);
+            return matcher.matches();
+        }
+        return false;
     }
 }
